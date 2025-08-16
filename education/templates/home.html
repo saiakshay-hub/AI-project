@@ -1,10 +1,42 @@
 {% extends "base.html" %}
 {% load static %}
 
-
-
 {% block content %}
 
-<h1><u>hello world</u></h1>
 
+<section class="hero">
+    <div class="hero-text">
+       <h1 class="dynamic-heading">
+        Empower Your Learning with AI-Guided
+       
+       </h1>
+        <p>Boost productivity with AI guidance, instant answers, and smart study planning.</p>
+        
+        <div class="records">
+            <div class="record">⏳ 30+<span> Hours Saved per Month</span></div>
+            <div class="record">🎯 92%<span> Quiz Accuracy Rate</span></div>
+            <div class="record">👨‍🎓 50,000+<span>Students Using StudyMate AI</span></div>
+        </div>
+       <div>
+        <a href="#" class="first-button">Start Your Journey</a>
+        <a href="#" class="second-button">Explore Study Tools</a>
+       </div>
+    </div>
+
+    <div class="hero-img">
+        <img src="{% static 'images/study2.webp' %}" alt="College Building">
+    </div>
+</section>
+
+<section>
+    <div class="box1">
+      <div class="box-content1">
+        <h1 class="head"> 📱Samsung S24 Ultra | AI Features</h1>
+        <img src="{% static 'images/aifu.jpg' %}" alt="load" height="260px" width='260px' >
+        <p class="para">See More</p>
+      </div>
+</section>
+
+
+ 
 {% endblock content %}
