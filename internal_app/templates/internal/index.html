@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block css_files %}
+<link rel="stylesheet" href="{% static 'internal/index.css'%}">
+{% endblock css_files %}
+{% block content %}
+<div class="container">
+    <div class="card">
+      {% if request.user.is_authenticated %}
+      <p class="welcome">Welcome,{{request.user.username}}</p> 
+      <p class="subtitle">Ready to investigate your problem & solution?</p>
+      {% else %}
+      <p class="welcome">welcome,Guest!!</p>
+      <p class="subtitle">Ready to investigate your problem & solution?</p>
+    
+      {% endif %}
+      <div class="buttons">
+        <button class="btn blue">Analyze Image</button>
+        <button class="btn green"><a href="{% url 'education_news' %}">News</a></button>
+        <button class="btn teal"><a href="{% url 'new_chat' %}">AI Tutor</a></button>
+        <button class="btn purple">Internship's</button>
+        <button class="btn pink">Documentation</button>
+      </div>
+    </div>
+  </div>
+{% endblock content %}

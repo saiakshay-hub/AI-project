@@ -1,0 +1,26 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Latest Education & Career News</title>
+  {% block css_files %}
+<link rel="stylesheet" href="{% static 'internal/news.css'%}">
+{% endblock css_files %}
+</head>
+<body>
+  <h1>Latest Education & Career News</h1>
+  {% for article in news %}
+    <div class="news-card">
+      <div class="image-wrapper">
+         <img src={{article.image}} class="news-image" alt="News Image">
+      </div>
+      <h2>{{ article.title }}</h2>
+      <p>{{ article.description }}</p>
+      <a href="{{ article.url }}" target="_blank">Read more →</a>
+    </div>
+  {% empty %}
+    <p style="text-align:center;">No news articles available right now.</p>
+  {% endfor %}
+</body>
+</html>

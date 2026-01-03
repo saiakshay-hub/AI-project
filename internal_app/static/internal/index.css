@@ -1,0 +1,100 @@
+/* ---------- Body ---------- */
+body {
+    background-color: #0a0a0a; /* black background */
+    color: #fff;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* ---------- Container ---------- */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 80px); /* Adjust if header height ~80px */
+    padding: 20px;
+}
+
+/* ---------- Card ---------- */
+.card {
+    background-color: #1a1a1a; /* slightly lighter black for card */
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 0 20px #8a2be2; /* purple shadow */
+    text-align: center;
+}
+
+/* ---------- Welcome & subtitle ---------- */
+.welcome {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    font-size: 16px;
+    color: #ccc;
+    margin-bottom: 20px;
+}
+
+/* ---------- Buttons ---------- */
+.buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+}
+
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: #fff;
+    text-decoration: none;
+    box-shadow: 0 0 10px #8a2be2; /* purple shadow for buttons */
+    font-weight: bold;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 20px #8a2be2;
+}
+
+/* ---------- Button colors ---------- */
+.btn.blue { background-color: #3b82f6; }
+.btn.green { background-color: #10b981; }
+.btn.teal { background-color: #14b8a6; }
+.btn.purple { background-color: #8a2be2; }
+.btn.pink { background-color: #ec4899; }
+
+.btn a{
+  text-decoration: none;
+  color: #fff;
+}
+.btn a:hover{
+  text-decoration: none;
+  color: #fff;
+}
+/* ---------- Responsive Design ---------- */
+@media (max-width: 600px) {
+    .card {
+        padding: 20px;
+    }
+
+    .btn {
+        width: 100%;
+        text-align: center;
+    }
+}
+/* ---------- Body ---------- */
+body {
+    background-color: #0a0a0a; /* black background */
+    color: #fff;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}

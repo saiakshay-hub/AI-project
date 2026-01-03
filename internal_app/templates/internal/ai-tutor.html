@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css_files %}
+<link rel="stylesheet" href="{% static 'internal/ai-tutor.css'%}">
+{% endblock css_files %}
+
+{% block content %}
+
+
+<div class="container">
+  
+  <div class="history">
+    <h2>Your Questions</h2>
+     <a href="{% url 'new_chat' %}" class="new-chat-btn">New Chat</a>
+    <ul>
+      {% for q in history %}
+      <li><strong>{{ q.question_text }}</strong><br>
+        {{q.response_text}}
+        <small>{{ q.asked_at }}</small>
+      </li>
+      {% empty %}
+      <li>No questions yet.</li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  <div class="chat-section">
+    <div class="response">
+      {% comment %} {% if data %}
+        
+        <div class="ai-msg"><strong>AI:</strong> {{ history.questionz}}</div>
+        <div class="ai-msg"><strong>AI:</strong> {{ data }}</div>
+      {% endif %} {% endcomment %}
+     {% for q in history %}
+        <div class="user-msg"><strong>You:</strong> {{ q.question_text }}</div>
+        <div class="ai-msg"><strong>AI:</strong> {{ q.response_text }}</div>
+      {% endfor %}
+    </div>
+
+    <!-- Input Fixed Bottom --> 
+    <form method="POST">
+      {% csrf_token %}
+      {{ form.question }}
+      <button type="submit">Ask</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

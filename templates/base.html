@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-GUIDED</title>
+    <link rel="stylesheet" href="{% static 'internal/base.css'%}">
+    {% block css_files %}{% endblock css_files %}
+</head>
+<body>
+   <header>
+  <div class="logo-title">
+    <div class="logo"> <img src="{% static 'internal/logo.png'%}" alt=""></div>
+    <div class="title"> <a href="{% url 'starting' %}">AI-Guided</a></div>
+  </div>
+  <div class="nav-buttons"> 
+      {% if user.is_authenticated %}
+           <button class="login"> <a href="{% url 'logout' %}" class="login">Logout</a></button>
+        {% else %}
+             <button class="signup"><a href="{% url 'signup' %}"  class="signup">Sign Up</a></button>
+             <button class="login"> <a href="{% url 'login' %}" class="login">Login</a></button>
+        {% endif %}
+  </div>
+</header>
+<main>
+    {% block content %}{% endblock content %}</main>
+</body>
+</html>

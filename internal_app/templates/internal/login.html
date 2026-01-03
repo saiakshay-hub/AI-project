@@ -1,0 +1,13 @@
+{% load static %}
+{% block css_files %}
+<link rel="stylesheet" href="{% static 'internal/signup.css'%}">
+{% endblock css_files %}
+
+<form method="POST" class="signup-form">
+    <h2>Login</h2>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <p class="message">Don't have an account? <a href="{% url 'signup' %}">Sign-Up here</a></p>
+
+    <button type="submit"  class="submit-btn">Login</button>
+</form>

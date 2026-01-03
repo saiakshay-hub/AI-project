@@ -1,0 +1,93 @@
+body {
+      background-color: #0a0a0a; /* deep black */
+      color: #fff;
+      font-family: "Poppins", sans-serif;
+      padding: 40px 20px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #a855f7; /* purple */
+      text-shadow: 0 0 15px #a855f7;
+      font-size: 2rem;
+      margin-bottom: 40px;
+    }
+
+    /* ---------- News Cards ---------- */
+    .news-card {
+      background-color: #111; /* dark grey-black */
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(168, 85, 247, 0.4); /* purple glow */
+      margin: 20px auto;
+      padding: 20px;
+      max-width: 750px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .news-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 0 30px rgba(168, 85, 247, 0.7);
+    }
+
+    /* ---------- Image Style ---------- */
+  .news-card {
+  background-color: #111;
+  border-radius: 20px;
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.4);
+  margin: 20px auto;
+  padding: 20px;
+  max-width: 750px;
+  overflow: hidden; /* 🔥 prevents image overflow */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.news-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 0 30px rgba(168, 85, 247, 0.7);
+}
+
+.news-image {
+  width: 100%;
+  height: 250px;
+  object-fit: cover; /* keeps ratio, crops neatly */
+  border-radius: 15px;
+  margin-bottom: 15px;
+  box-shadow: 0 0 10px rgba(168, 85, 247, 0.4);
+  display: block;
+}
+    /* ---------- Title ---------- */
+    h2 {
+      color: #d1b3ff; /* soft lavender */
+      margin-bottom: 10px;
+      font-size: 1.4rem;
+    }
+
+    /* ---------- Description ---------- */
+    p {
+      color: #ccc;
+      font-size: 1rem;
+      line-height: 1.5;
+      margin-bottom: 15px;
+    }
+
+    /* ---------- Read More Link ---------- */
+    a {
+      display: inline-block;
+      color: #a855f7;
+      font-weight: bold;
+      text-decoration: none;
+      transition: color 0.3s ease, text-shadow 0.3s ease;
+    }
+
+    a:hover {
+      color: #fff;
+      text-shadow: 0 0 10px #a855f7;
+    }
+
+    /* ---------- Empty Message ---------- */
+    .no-news {
+      text-align: center;
+      color: #a855f7;
+      margin-top: 50px;
+      font-size: 1.2rem;
+    }

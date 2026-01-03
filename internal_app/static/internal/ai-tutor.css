@@ -1,0 +1,158 @@
+
+.title{
+  color: white;
+}
+
+/* Left Sidebar - History */
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 80px 0 0 0;
+}
+
+h2 {
+  text-align: center;
+  font-size: 1.2rem;
+  margin: 10px 0;
+  color: #b87fff;
+}
+
+ul li {
+  background: #151515;
+  padding: 10px;
+  margin: 8px;
+  border-radius: 10px;
+  color: #ccc;
+  border-left: 3px solid #7a00ff;
+  transition: 0.3s;
+  font-size: 0.9rem;
+}
+
+ul li:hover {
+  background: #1f1f1f;
+  color: #fff;
+  transform: scale(1.02);
+}
+
+/* Layout Split */
+.container {
+  display: flex;
+  flex: 1;
+  margin-top: 70px;
+  width: 100%;
+}
+
+/* History Section (Left) */
+.history {
+  width: 25%;
+  background: #0f0f0f;
+  border-right: 2px solid #3f0071;
+  padding: 10px;
+  overflow-y: auto;
+  height: calc(100vh - 70px);
+}
+
+/* Chat Section (Right) */
+.chat-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 20px;
+  height: calc(100vh - 70px);
+  overflow: hidden;
+  position: relative;
+}
+
+/* Chat Messages */
+.response {
+  flex: 1;
+  overflow-y: auto;
+  margin-bottom: 70px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Message Bubbles */
+.user-msg, .ai-msg {
+  max-width: 60%;
+  padding: 12px 15px;
+  border-radius: 16px;
+  line-height: 1.4;
+  font-size: 0.95rem;
+  color: white;
+}
+
+.user-msg {
+  align-self: flex-end;
+  background: #4b0082;
+  box-shadow: 0 0 10px #8000ff;
+}
+
+
+.ai-msg {
+  align-self: flex-start;
+  background: #1a1a1a;
+  border: 1px solid #8000ff;
+  box-shadow: 0 0 10px #2b0050;
+}
+
+/* Input Bar (Fixed Bottom) */
+form {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 72%;
+  display: flex;
+  background: #0f0f0f;
+  padding: 15px;
+  gap: 10px;
+}
+
+form textarea, form input[type="text"] {
+  flex: 1;
+  background: #1b1b1b;
+  border: 1px solid #8000ff;
+  color: #fff;
+  border-radius: 10px;
+  padding: 10px;
+  resize: none;
+  outline: none;
+  font-size: 1rem;
+}
+
+form button {
+  background: #7a00ff;
+  border: none;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+form button:hover {
+  background: #9b00ff;
+  box-shadow: 0 0 10px #9b00ff;
+}
+
+.history-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.new-chat-btn {
+    background-color: #8000ff;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.new-chat-btn:hover {
+    background-color: #006fd6;
+}
