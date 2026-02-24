@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="intern.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+</head>
+<body>
+    <nav class="navbar">
+    <div class="navbar-logo">
+      <img src="images/logo3.png" alt="Logo">
+      <span class="brand-text"></span>
+    </div>
+    <ul class="navbar-links">
+      <li><a href="homepage.html">Home</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">AI Tutor</a></li>
+      <li><a href="#">Internship</a></li>
+      <li><a href="#">Certificates</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </nav>
+  <div class="main-heading">2025 Work From Home Internships</div>
+  <div class="sub-heading">✨ Latest Remote Internships For Students ✨</div>
+  <div class="container">
+  <div class="box">
+    <div class="filter">
+      <h1>Filters</h1>
+      <input type="checkbox" class="my-input">As per my <span style="color:rgb(15, 104, 227)">preferences</span><br><br><br>
+    </div>
+
+    <div class="search">
+      <label>Profile</label><br>
+      <input type="text" placeholder="e.g. Marketing" class="search-input" id="searchInput" autocomplete="off">
+      <div id="suggestions-container" class="suggestions-list"></div><br>
+
+      <label>Location</label><br>
+      <input type="text" placeholder="e.g. Hyderabad" class="search-input" id="searchInput" autocomplete="off">
+      <br><br>
+
+      <div class="checkbox">
+        <input type="checkbox"><span>Work From Home</span><br>
+        <input type="checkbox"><span>Part-Time</span><br>
+        <input type="checkbox"><span>Internship In Your City</span>
+      </div>  
+    </div>
+
+    <div class="stiped">
+      <p>Desired minimum monthly stipend (₹) <span id="value">10000</span></p>
+      <input type="range" min="0" max="10000" step="2000" value="10000" id="slider" style="width:300px;">
+      <div class="scale">
+        <span>0</span>
+        <span>2k</span>
+        <span>4k</span>
+        <span>6k</span>
+        <span>8k</span>
+        <span>10k</span>           
+      </div>
+    </div>    
+
+    <br><br>
+    <label>Start date from (or After)</label><br>
+    <input  type="text" placeholder="Enter Start Date" id="dateId" class="dateInput"><br><br>
+
+    <label>Max-Duration(Months)</label><br>
+    <select id="duration" class="search-input">
+      <option value="" disabled selected>Select duration</option>
+      <option value="1">1 month</option>
+      <option value="2">2 months</option>
+      <option value="3">3 months</option>
+      <option value="4">4 months</option>
+      <option value="6">6 months</option>
+      <option value="12">12 months</option>
+      <option value="24">24 months</option>
+      <option value="36">36 months</option>
+    </select>
+    <br><br>   
+
+    <div class="skills">
+      <label for="skills">Skills</label>
+      <input type="text" id="skills" placeholder="e.g. HTML, CSS, JavaScript" class="search-input">
+      <button id="searchButton">Search</button>
+    </div>        
+  </div> 
+
+  <div class="cards" >
+    <div class="cardd" id="card1">
+      <div class="title">Web Development</div>
+      <div class="company">Google <span class="hiring">Actively hiring</span></div>
+      <div class="details">💻 Work from home &nbsp; | &nbsp; 💰 ₹3,000 - 11,000 /month &nbsp; | &nbsp; 📅 6 Months</div>
+      <div class="desc">We're seeking a motivated front end developer intern to assist our development team in creating ...</div>
+      <div class="tags">
+        <span>HTML</span> <span>CSS</span> <span>JavaScript</span> <span>TypeScript</span> <span>Tailwind CSS</span>
+      </div>
+      <div class="footer">
+         <span>⏰ 3 days ago</span>
+        <span class="offer">Job offer upto ₹5LPA post internship</span>
+      </div>
+    </div>
+      <div class="cardd">
+      <div class="title">Backend Developer</div>
+      <div class="company">Microsoft <span class="hiring">Actively hiring</span></div>
+      <div class="details">online Internship &nbsp; | &nbsp; 💰5,000 - 15,000 /month &nbsp; | &nbsp; 🗓️ 3 Months</div>
+      <div class="desc">We are hiring passionate backend developer to join in backend development team.... </div>
+      <div class="tags">
+      <span>Django</span>   <span>Flask</span>   <span>FastApi</span> <span>Node js</span>
+      </div>
+      <div class="footer">
+         <span>⌛2hr Ago</span>
+         <span class="offer">Job offer upto ₹10LPA post internship</span>
+      </div>
+    </div>
+    <div class="cardd">
+      <div class="title">Mobile App Development</div>
+      <div class="company">TechNova Ltd <span class="hiring">Actively hiring</span></div>
+      <div class="details">💻 Work from home &nbsp; | &nbsp; 💰 ₹5,000 – 12,000 /month &nbsp; | &nbsp; 📅 4 Months</div>
+      <div class="desc">Join us as a mobile app developer intern. You'll work on exciting projects with React Native...</div>
+      <div class="tags">
+        <span>React Native</span> <span>JavaScript</span> <span>Firebase</span> <span>Redux</span>
+      </div>
+      <div class="footer">
+        <span>⏰ 1 week ago</span>
+        <span class="offer">Job offer upto ₹4LPA post internship</span>
+      </div>
+    </div>
+    <div class="cardd">
+      <div class="title">Full Stack Development</div>
+    <div class="company">CodeCraft Pvt Ltd <span class="hiring">Actively hiring</span></div>
+    <div class="details">💻 Work from home &nbsp; | &nbsp; 💰 ₹8,000 – 15,000 /month &nbsp; | &nbsp; 📅 6 Months</div>
+    <div class="desc">Work on both frontend and backend projects. You'll learn to build complete web applications using modern frameworks...</div>
+    <div class="tags">
+      <span>HTML</span> <span>CSS</span> <span>JavaScript</span> <span>React</span> <span>Node.js</span> <span>MongoDB</span> <span>Express.js</span>
+    </div>
+    <div class="footer">
+      <span>⏰ 2 days ago</span>
+      <span class="offer">Job offer upto ₹6LPA post internship</span>
+    </div>
+    </div>
+    <div class="cardd">
+      <div class="title">Artificial Intelligence</div>
+    <div class="company">AI Innovators <span class="hiring">Actively hiring</span></div>
+    <div class="details">💻 Work from home &nbsp; | &nbsp; 💰 ₹10,000 – 20,000 /month &nbsp; | &nbsp; 📅 4 Months</div>
+    <div class="desc">Join our AI research team to work on real-world projects involving machine learning, computer vision, and natural language processing...</div>
+    <div class="tags">
+      <span>Python</span> <span>TensorFlow</span> <span>PyTorch</span> <span>Machine Learning</span> <span>Deep Learning</span> <span>Data Science</span>
+    </div>
+    <div class="footer">
+      <span>⏰ 5 days ago</span>
+      <span class="offer">Job offer upto ₹8LPA post internship</span>
+    </div>
+  </div>
+    </div>
+    </div>
+  </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script>   
+      flatpickr("#dateId",{
+         dateFormat: "Y-m-d",
+        minDate: "today",
+        position: "below" 
+});
+  
+const searchButton = document.getElementById("searchButton");
+const inputBox = document.getElementById("skills");
+const cards = document.querySelectorAll(".cardd");
+
+searchButton.addEventListener("click", () => {
+  let input = inputBox.value.trim().toLowerCase();
+ let searchSkills = input.split(/[\s,]+/).filter(skill => skill !== "").map(skill => skill.replace("javascript", "js"));
+  cards.forEach(card => {
+    let tags = card.querySelectorAll(".tags span");
+    let tagTexts = Array.from(tags).map(tag => tag.textContent.toLowerCase());
+
+    let normalizedTags = tagTexts.map(tag => 
+      tag.replace("javascript", "js")
+    );
+
+    let allMatch = searchSkills.every(skill => 
+      normalizedTags.some(tag => tag.includes(skill))
+    );
+
+    if (searchSkills.length > 0 && allMatch) {
+      card.style.display = "block";
+    } else {
+      card.style.display = "none";
+    }
+  });
+});
+
+</script>
+</body>
+</html>

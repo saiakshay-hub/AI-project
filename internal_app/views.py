@@ -113,13 +113,19 @@ def ai_tutor(request, session_id):
 
                 # ✅ Save Q/A with session
                 if request.user.is_authenticated:
-                    Question.objects.create(
+                    q = Question.objects.create(
                         session=session,       # ✅ IMPORTANT
                         user=request.user,
                         question_text=question,
                         response_text=response_data,
                         asked_at=datetime.now()
                     )
+
+                    # If this session doesn't have a meaningful title yet, set it
+                    # to the first question (trimmed) so the sidebar shows the prompt.
+                    if not session.title or session.title.strip() == "":
+                        session.title = (question[:140]).strip()
+                        session.save()
 
                 # ✅ Redirect to same session (this clears input box)
                 return redirect("aitutor", session_id=session.id)
@@ -133,28 +139,48 @@ def ai_tutor(request, session_id):
     # Load only questions from THIS session
     history = Question.objects.filter(session=session).order_by("asked_at")
 
+    # Load all sessions for the left sidebar (so user can switch between sessions)
+    sessions = ChatSession.objects.filter(user=request.user).order_by('-id')
+
     return render(request, "internal/ai-tutor.html", {
         "form": form,
         "data": response_data,
         "history": history,
-        "session": session
+        "session": session,
+        "sessions": sessions,
     })
 @login_required
 def new_chat(request):
     # Find the last chat session for this user
     last_session = ChatSession.objects.filter(user=request.user).order_by('-id').first()
     
-    if last_session:
-        session_number = ChatSession.objects.filter(user=request.user).count() + 1
-        title = f"Chat {session_number}"
-    else:
-        session_number = 1
-        title = "Chat 1"
-
-    # Create a new chat session linked to this user
+    # Create a new chat session linked to this user.
+    # Leave the title empty so it can be set to the first question asked.
     session = ChatSession.objects.create(
         user=request.user,
-        title=title
+        title=""
     )
     
     return redirect("aitutor", session_id=session.id)
+
+
+@login_required
+def delete_chat(request, session_id):
+    # Allow users to delete their own chat sessions
+    try:
+        session = ChatSession.objects.get(id=session_id, user=request.user)
+    except ChatSession.DoesNotExist:
+        return redirect('starting')
+
+    if request.method == 'POST':
+        session.delete()
+
+        # Redirect to another existing session if present, otherwise create a new one
+        next_session = ChatSession.objects.filter(user=request.user).order_by('-id').first()
+        if next_session:
+            return redirect('aitutor', session_id=next_session.id)
+        else:
+            return redirect('new_chat')
+
+    # If GET, just redirect back to the tutor view for this session
+    return redirect('aitutor', session_id=session_id)

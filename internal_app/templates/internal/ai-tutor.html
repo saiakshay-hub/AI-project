@@ -11,39 +11,66 @@
 <div class="container">
   
   <div class="history">
-    <h2>Your Questions</h2>
-     <a href="{% url 'new_chat' %}" class="new-chat-btn">New Chat</a>
-    <ul>
-      {% for q in history %}
-      <li><strong>{{ q.question_text }}</strong><br>
-        {{q.response_text}}
-        <small>{{ q.asked_at }}</small>
+    <div class="history-header">
+      <h2>Your Chats</h2>
+      <a href="{% url 'new_chat' %}" class="new-chat-btn">New Chat</a>
+    </div>
+    <ul class="sessions-list">
+      {% for s in sessions %}
+      <li class="session-item {% if s.id == session.id %}active{% endif %}">
+        <div class="session-row">
+          <a href="{% url 'aitutor' s.id %}">
+            <strong>{{ s.title }}</strong><br>
+            <small class="muted">{{ s.created_at|default:"" }}</small>
+          </a>
+
+          <form method="POST" action="{% url 'delete_chat' s.id %}" class="delete-form">
+            {% csrf_token %}
+            <button type="submit" class="delete-btn" title="Delete chat">Delete</button>
+          </form>
+        </div>
       </li>
       {% empty %}
-      <li>No questions yet.</li>
+      <li>No chats yet.</li>
       {% endfor %}
     </ul>
   </div>
 
   <div class="chat-section">
-    <div class="response">
-      {% comment %} {% if data %}
-        
-        <div class="ai-msg"><strong>AI:</strong> {{ history.questionz}}</div>
-        <div class="ai-msg"><strong>AI:</strong> {{ data }}</div>
-      {% endif %} {% endcomment %}
-     {% for q in history %}
-        <div class="user-msg"><strong>You:</strong> {{ q.question_text }}</div>
-        <div class="ai-msg"><strong>AI:</strong> {{ q.response_text }}</div>
-      {% endfor %}
+    <div class="response" id="chatResponse">
+      {% if history.exists %}
+        {% for q in history %}
+          <div class="message">
+            <div class="user-msg">
+              <div class="msg-head"><strong>You</strong> <span class="timestamp">{{ q.asked_at }}</span></div>
+              <div class="msg-body user-text">{{ q.question_text|linebreaksbr }}</div>
+            </div>
+
+            <div class="ai-msg">
+              <div class="msg-head"><strong>AI</strong> <span class="timestamp">{{ q.asked_at }}</span></div>
+              <div class="msg-body ai-text">{{ q.response_text|linebreaksbr }}</div>
+            </div>
+          </div>
+        {% endfor %}
+      {% else %}
+        <div class="empty-chat">Start the conversation by asking a question.</div>
+      {% endif %}
     </div>
 
-    <!-- Input Fixed Bottom --> 
-    <form method="POST">
+    <!-- Input anchored inside chat-section --> 
+    <form method="POST" class="chat-input">
       {% csrf_token %}
       {{ form.question }}
       <button type="submit">Ask</button>
     </form>
   </div>
 </div>
+
+<script>
+  // Auto-scroll to bottom of chat on load
+  (function(){
+    const el = document.getElementById('chatResponse');
+    if(el){ el.scrollTop = el.scrollHeight; }
+  })();
+</script>
 {% endblock %}
