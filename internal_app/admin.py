@@ -1,7 +1,8 @@
 from django.contrib import admin
-from .models import Question
+from .models import Question, Internship
+
 # Register your models here.
-admin.site.register([Question])
+admin.site.register([Question, Internship])
 
 admin.site.site_header = "AI Guided Dashboard!"
 admin.site.site_title = "AI Admin Portal"

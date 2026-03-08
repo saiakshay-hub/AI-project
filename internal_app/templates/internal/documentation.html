@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block css_files %}
+<link rel="stylesheet" href="{% static 'internal/documentation.css' %}">
+{% endblock css_files %}
+
+{% block title %}Project Documentation{% endblock title %}
+
+{% block content %}
+<h1>AI-Guided Application Documentation</h1>
+<section>
+    <h2>Overview</h2>
+    <p>This Django project provides a simple full-stack environment with user
+    authentication, an AI chat tutor, education news integration, and an internship
+    finder module.</p>
+</section>
+
+<section>
+    <h2>Features</h2>
+    <ul>
+        <li>User sign‑up/log‑in using Django auth.</li>
+        <li>AI tutor powered by SanbanoVa API with session history.</li>
+        <li>Education news fetched from GNews API.</li>
+        <li>Internship finder backed by a database model and filterable via GET
+            parameters.</li>
+        <li>Admin dashboard with custom header and models registered.</li>
+    </ul>
+</section>
+
+<section>
+    <h2>Internship Finder Logic</h2>
+    <p>The page located at <code>/internships/</code> is rendered by
+    <code>internal_app.views.internships</code>.  Internships are stored in the
+    <code>Internship</code> model.  Filters are passed as query parameters and
+    used to narrow the queryset; for example <code>?skills=django,react&work_from_home=on&min_stipend=5000</code>.</p>
+    <p>The template iterates over the <code>internships</code> context variable
+    and displays a card for each posting.  New postings may be created via the
+    Django admin or by extending the site with a form/API.</p>
+</section>
+
+<section>
+    <h2>Getting Started</h2>
+    <p>Setup steps are identical to those described in the root README: create a
+    virtualenv, install dependencies, run migrations, and start the server.</p>
+</section>
+
+<footer>
+    <p>Refer to <a href="/README.md">README.md</a> in the project root for
+    full developer documentation.</p>
+</footer>
+{% endblock content %}

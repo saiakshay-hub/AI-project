@@ -1,0 +1,32 @@
+/* styles for the internship finder page */
+/* Add custom rules here; base.css already provides global layout */
+
+.navbar {
+    display: flex;
+    background-color: #222;
+    padding: 10px;
+}
+
+.navbar-links li {
+    display: inline;
+    margin-right: 15px;
+}
+
+.navbar-links a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.cards {
+    margin-top: 20px;
+}
+
+.cardd {
+    background-color: #fafafa;
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+}
+
+/* further styling can be added as needed */

@@ -14,6 +14,13 @@
     <div class="logo"> <img src="{% static 'internal/logo.png'%}" alt=""></div>
     <div class="title"> <a href="{% url 'starting' %}">AI-Guided</a></div>
   </div>
+  <nav class="main-nav">
+      <a href="{% url 'starting' %}">Home</a>
+      <a href="{% url 'education_news' %}">News</a>
+      <a href="{% url 'new_chat' %}">AI Tutor</a>
+      <a href="{% url 'internships' %}">Internships</a>
+      <a href="{% url 'documentation' %}">Docs</a>
+  </nav>
   <div class="nav-buttons"> 
       {% if user.is_authenticated %}
            <button class="login"> <a href="{% url 'logout' %}" class="login">Logout</a></button>
