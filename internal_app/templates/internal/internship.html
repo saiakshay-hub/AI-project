@@ -1,108 +1,22 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 {% load static %}
 
 {% block css_files %}
-<link rel="stylesheet" href="{% static 'internal/internship.css' %}">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<link rel="stylesheet" href="{% static 'internal/internship.css'%}">
 {% endblock css_files %}
 
-{% block title %}Internship Finder{% endblock title %}
-
 {% block content %}
-<div class="main-heading">2025 Work From Home Internships</div>
-  <div class="sub-heading">✨ Latest Remote Internships For Students ✨</div>
+<section class="internship-search">
+  <form class="search-form" method="POST">
+      {% csrf_token %}
 
-<form method="get" class="container">
-  <div class="box">
-    <div class="filter">
-      <h1>Filters</h1>
-      <input type="checkbox" class="my-input">As per my <span style="color:rgb(15, 104, 227)">preferences</span><br><br><br>
-    </div>
+      <label for="skill">Skill</label>
+      <input id="skill" type="text" name="skill" placeholder="Enter skill (python, ml)" required>
 
-    <div class="search">
-      <label for="skills">Profile / Skills</label><br>
-      <input type="text" name="skills" value="{{ request.GET.skills }}" placeholder="e.g. HTML, CSS" class="search-input"><br><br>
+      <label for="description">Description</label>
+      <textarea id="description" name="description" placeholder="Describe your skills"></textarea>
 
-      <label for="location">Location</label><br>
-      <input type="text" name="location" value="{{ request.GET.location }}" placeholder="e.g. Hyderabad" class="search-input"><br><br>
-
-      <div class="checkbox">
-        <input type="checkbox" name="work_from_home" {% if request.GET.work_from_home %}checked{% endif %}><span>Work From Home</span><br>
-        <input type="checkbox" name="part_time" {% if request.GET.part_time %}checked{% endif %}><span>Part-Time</span><br>
-        <input type="checkbox" name="city" {% if request.GET.city %}checked{% endif %}><span>Internship In Your City</span>
-      </div>  
-    </div>
-
-    <div class="stiped">
-      <p>Desired minimum monthly stipend (₹) <span id="value">10000</span></p>
-      <input type="range" min="0" max="10000" step="2000" value="10000" id="slider" name="min_stipend" style="width:300px;">
-      <div class="scale">
-        <span>0</span>
-        <span>2k</span>
-        <span>4k</span>
-        <span>6k</span>
-        <span>8k</span>
-        <span>10k</span>           
-      </div>
-    </div>    
-
-    <br><br>
-    <label>Start date from (or After)</label><br>
-    <input  type="text" placeholder="Enter Start Date" id="dateId" class="dateInput" name="start_date"><br><br>
-
-    <label>Max-Duration(Months)</label><br>
-    <select id="duration" class="search-input" name="duration">
-      <option value="" disabled selected>Select duration</option>
-      <option value="1">1 month</option>
-      <option value="2">2 months</option>
-      <option value="3">3 months</option>
-      <option value="4">4 months</option>
-      <option value="6">6 months</option>
-      <option value="12">12 months</option>
-      <option value="24">24 months</option>
-      <option value="36">36 months</option>
-    </select>
-    <br><br>   
-
-    <button type="submit" class="btn purple">Apply filters</button>
-  </div> 
-</form>
-
-<div class="cards">
-    {% for intern in internships %}
-    <div class="cardd">
-      <div class="title">{{ intern.title }}</div>
-      <div class="company">{{ intern.company }} <span class="hiring">Actively hiring</span></div>
-      <div class="details">
-        {% if intern.work_from_home %}💻 Work from home{% endif %}
-        {% if intern.part_time %} &nbsp; | &nbsp; Part-Time{% endif %}
-        &nbsp; | &nbsp; 💰 ₹{{ intern.stipend_min }} - {{ intern.stipend_max }} /month
-        &nbsp; | &nbsp; 📅 {{ intern.duration_months }} Months
-      </div>
-      <div class="desc">{{ intern.description }}</div>
-      <div class="tags">
-        {% for skill in intern.skill_list %}
-        <span>{{ skill }}</span>
-        {% endfor %}
-      </div>
-      <div class="footer">
-         <span>⏰ {{ intern.posted_at|timesince }} ago</span>
-        <span class="offer">{{ intern.post_offer }}</span>
-      </div>
-    </div>
-    {% empty %}
-      <p>No internships found matching your filters.</p>
-    {% endfor %}
-</div>
+      <button class="search-btn" type="submit">Search</button>
+  </form>
+</section>
 {% endblock content %}
-
-{% block extra_scripts %}
-<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-<script>
-  flatpickr("#dateId",{
-     dateFormat: "Y-m-d",
-    minDate: "today",
-    position: "below" 
-});
-</script>
-{% endblock extra_scripts %}

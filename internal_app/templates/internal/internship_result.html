@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css_files %}
+<link rel="stylesheet" href="{% static 'internal/internship.css'%}">
+{% endblock css_files %}
+
+{% block content %}
+<h1>Internships</h1>
+
+<section class="internship-list">
+{% for internship in internships %}
+<div class="internship-card">
+    <h2>{{ internship.title }}</h2>
+    <p><strong>Company:</strong> {{ internship.company }}</p>
+    <p><strong>Location:</strong> {{ internship.location }}</p>
+    <p><strong>Skills Required:</strong> {{ internship.skills_required }}</p>
+    <p><strong>Source:</strong> {{ internship.source }}</p>
+    <a class="apply-btn" href="{{ internship.apply_link }}" target="_blank" rel="noopener noreferrer">Apply</a>
+</div>
+{% empty %}
+<p class="no-results">No internships found 😢</p>
+{% endfor %}
+</section>
+  
+{% endblock content %}

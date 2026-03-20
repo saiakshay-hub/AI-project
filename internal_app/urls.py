@@ -12,5 +12,5 @@ urlpatterns = [
     path("ai-tutor/<int:session_id>/", views.ai_tutor, name="aitutor"),
     path('new-chat/', views.new_chat, name='new_chat'),
     path('delete-chat/<int:session_id>/', views.delete_chat, name='delete_chat'),
-
+    path("interships/", views.internships,name="interships")
 ]

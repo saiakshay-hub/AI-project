@@ -18,32 +18,16 @@ class Question(models.Model):
         return f"{self.user.username} - {self.question_text[:50]}"
 
 
-# ---------------------------------------------------------------------------
-# Helpers for the internship listing feature
-# ---------------------------------------------------------------------------
 
 class Internship(models.Model):
-    """Represents a single internship posting.
-
-    This model is used by the internship finder page.  For simplicity the
-    skills field is a comma‑separated string, but a more scalable design
-    would use a separate Skill model with a many‑to‑many relationship.
-    """
     title = models.CharField(max_length=255)
     company = models.CharField(max_length=255)
-    location = models.CharField(max_length=255, blank=True)
-    work_from_home = models.BooleanField(default=False)
-    part_time = models.BooleanField(default=False)
-    city = models.CharField(max_length=100, blank=True)
-    stipend_min = models.IntegerField(null=True, blank=True)
-    stipend_max = models.IntegerField(null=True, blank=True)
-    duration_months = models.IntegerField(null=True, blank=True)
-    start_date = models.DateField(null=True, blank=True)
-    skills = models.CharField(max_length=512, blank=True,
-                              help_text="Comma-separated list of skills")
-    post_offer = models.CharField(max_length=255, blank=True)
+    location = models.CharField(max_length=255)
+    skills = models.TextField(max_length=100, blank=True,null=True)
+    skills_required = models.CharField(max_length=100,null=True,blank=True)
     description = models.TextField(blank=True)
-    posted_at = models.DateTimeField(auto_now_add=True)
-
+    apply_link = models.URLField()
+    source = models.CharField(max_length=100)
+    
     def __str__(self):
         return f"{self.title} @ {self.company}"

@@ -9,6 +9,7 @@ from .models import Question, ChatSession, Internship
 from .forms import QuestionForm
 from datetime import datetime
 from django.contrib.auth.decorators import login_required
+from .scraper import get_all_internships
 
 
 # Create your views here.
@@ -154,56 +155,42 @@ def ai_tutor(request, session_id):
         "session": session,
         "sessions": sessions,
     })
+    
 @login_required
-
 def internships(request):
-    """Render a list of internships and apply simple GET filters.
+    if request.method == "POST":
+        skill = request.POST.get("skill")
+        description = request.POST.get("description")
 
-    Filters supported in this example:
-      * skills - comma-separated string to match against the skills field
-      * work_from_home - 'on' to filter by work_from_home=True
-      * part_time - 'on' to filter by part_time=True
-      * min_stipend - integer minimum stipend
+        query = skill if skill else description
 
-    Additional parameters can be added by updating the query set logic below
-    and reflecting the fields in the template's form.
-    """
+        if query:
+            query = query.lower().strip()
 
-    qs = Internship.objects.all()
+        data = get_all_internships(query)
 
-    # #### skills ####
-    skills_param = request.GET.get('skills', '').strip()
-    if skills_param:
-        terms = [t.strip().lower() for t in skills_param.split(',') if t.strip()]
-        for term in terms:
-            qs = qs.filter(skills__icontains=term)
+        # clear old data
+        Internship.objects.all().delete()
 
-    # #### work from home ####
-    if request.GET.get('work_from_home') == 'on':
-        qs = qs.filter(work_from_home=True)
+        # save to DB
+        for item in data:
+            Internship.objects.create(
+                title=item["title"],
+                company=item["company"],
+                location=item["location"],
+                skills=item["skills_required"],
+                apply_link=item["apply_link"],
+                source=item["source"]
+            )
 
-    # #### part time ####
-    if request.GET.get('part_time') == 'on':
-        qs = qs.filter(part_time=True)
+        internships = Internship.objects.all()
 
-    # #### minimum stipend ####
-    min_stipend = request.GET.get('min_stipend')
-    if min_stipend and min_stipend.isdigit():
-        qs = qs.filter(stipend_min__gte=int(min_stipend))
+        return render(request, "internal/internship_result.html", {
+            "internships": internships,
+            "query": query
+        })
 
-    internships_list = qs.order_by('-posted_at')
-
-    # pre-split comma-separated skills so template doesn't need a custom filter
-    for intern in internships_list:
-        if intern.skills:
-            intern.skill_list = [s.strip() for s in intern.skills.split(',') if s.strip()]
-        else:
-            intern.skill_list = []
-
-    return render(request, 'internal/internship.html', {
-        'internships': internships_list,
-    })
-
+    return render(request, "internal/internship.html")
 
 @login_required
 def new_chat(request):
