@@ -16,6 +16,11 @@ body {
     padding: 20px;
 }
 
+.username{
+    color: purple;
+    font-size:xx-large;
+}
+
 /* ---------- Card ---------- */
 .card {
     background-color: #1a1a1a; /* slightly lighter black for card */

@@ -1,52 +1,167 @@
-{% extends "base.html" %}
-{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Chatbot Project Documentation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            background-color: #000000;
+            color: #ffffff;
+        }
+        h1, h2, h3 {
+            color: #cb13c5;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: rgb(4, 3, 3);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 20px 10px 50px rgba(226, 9, 197, 0.712);
+        }
+        ul {
+            line-height: 1.8;
+        }
+        code {
+            background: #df05b4;
+            padding: 4px 6px;
+            border-radius: 5px;
+        }
+        .section {
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
 
-{% block css_files %}
-<link rel="stylesheet" href="{% static 'internal/documentation.css' %}">
-{% endblock css_files %}
+<div class="container">
 
-{% block title %}Project Documentation{% endblock title %}
+    <h1>Project Documentation :</h1>
 
-{% block content %}
-<h1>AI-Guided Application Documentation</h1>
-<section>
-    <h2>Overview</h2>
-    <p>This Django project provides a simple full-stack environment with user
-    authentication, an AI chat tutor, education news integration, and an internship
-    finder module.</p>
-</section>
+    <div class="section">
+        <h2>1. Project Overview</h2>
+        <p>
+            This project is an AI-powered chatbot system designed to provide intelligent responses,
+            educational news updates, and internship opportunities. The system integrates multiple
+            technologies including AI APIs and web scraping to deliver real-time and useful data.
+        </p>
+    </div>
 
-<section>
-    <h2>Features</h2>
-    <ul>
-        <li>User sign‑up/log‑in using Django auth.</li>
-        <li>AI tutor powered by SanbanoVa API with session history.</li>
-        <li>Education news fetched from GNews API.</li>
-        <li>Internship finder backed by a database model and filterable via GET
-            parameters.</li>
-        <li>Admin dashboard with custom header and models registered.</li>
-    </ul>
-</section>
+    <div class="section">
+        <h2>2. Key Features</h2>
+        <ul>
+            <li><strong>AI Chatbot:</strong> Generates responses using Sambanova API.</li>
+            <li><strong>Educational News:</strong> Fetches latest education-related news.</li>
+            <li><strong>Internship Finder:</strong> Scrapes internship listings from Internshala and OK Remote.</li>
+        </ul>
+    </div>
 
-<section>
-    <h2>Internship Finder Logic</h2>
-    <p>The page located at <code>/internships/</code> is rendered by
-    <code>internal_app.views.internships</code>.  Internships are stored in the
-    <code>Internship</code> model.  Filters are passed as query parameters and
-    used to narrow the queryset; for example <code>?skills=django,react&work_from_home=on&min_stipend=5000</code>.</p>
-    <p>The template iterates over the <code>internships</code> context variable
-    and displays a card for each posting.  New postings may be created via the
-    Django admin or by extending the site with a form/API.</p>
-</section>
+    <div class="section">
+        <h2>3. Technologies Used</h2>
+        <ul>
+            <li>Backend: Django (Python)</li>
+            <li>Frontend: HTML, CSS, JavaScript</li>
+            <li>Database: dbsqlite3</li>
+            <li>AI API: Sambanova</li>
+            <li>Web Scraping: BeautifulSoup, Requests</li>
+        </ul>
+    </div>
 
-<section>
-    <h2>Getting Started</h2>
-    <p>Setup steps are identical to those described in the root README: create a
-    virtualenv, install dependencies, run migrations, and start the server.</p>
-</section>
+    <div class="section">
+        <h2>4. System Architecture</h2>
+        <p>The system is divided into three main modules:</p>
+        <ul>
+            <li><strong>Chat Module:</strong> Handles user queries and sends them to Sambanova API.</li>
+            <li><strong>News Module:</strong> Retrieves education-based news using APIs or scraping.</li>
+            <li><strong>Internship Module:</strong> Scrapes internship data from external platforms.</li>
+        </ul>
+    </div>
 
-<footer>
-    <p>Refer to <a href="/README.md">README.md</a> in the project root for
-    full developer documentation.</p>
-</footer>
-{% endblock content %}
+    <div class="section">
+        <h2>5. AI Chatbot Module</h2>
+        <p>
+            The chatbot takes user input and processes it through the Sambanova API.
+            It returns AI-generated responses in real-time.
+        </p>
+        <p><strong>Flow:</strong></p>
+        <ul>
+            <li>User inputs query</li>
+            <li>Request sent to backend</li>
+            <li>Backend calls Sambanova API</li>
+            <li>Response displayed to user</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>6. News Feature</h2>
+        <p>
+            The news module provides the latest updates focused on education.
+            It ensures users stay informed about trends, exams, and opportunities.
+        </p>
+        <p><strong>Sources:</strong></p>
+        <ul>
+            <li>Education news APIs OR</li>
+            <li>Web scraping from trusted news websites</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>7. Internship Scraper Module</h2>
+        <p>
+            This module collects internship opportunities from:
+        </p>
+        <ul>
+            <li><strong>Internshala</strong></li>
+            <li><strong>OK Remote</strong></li>
+        </ul>
+
+        <p><strong>Functionality:</strong></p>
+        <ul>
+            <li>Search internships based on skill</li>
+            <li>Scrape job title, company, location, and link</li>
+            <li>Display results dynamically</li>
+        </ul>
+
+        <p><strong>Tools Used:</strong></p>
+        <ul>
+            <li><code>requests</code> – to fetch web pages</li>
+            <li><code>BeautifulSoup</code> – to parse HTML</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>8. Workflow</h2>
+        <ul>
+            <li>User interacts with chatbot interface</li>
+            <li>Chooses feature (Chat / News / Internships)</li>
+            <li>Backend processes request</li>
+            <li>Data fetched from API or scraping</li>
+            <li>Results displayed on UI</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>9. Future Enhancements</h2>
+        <ul>
+            <li>Add more job platforms (LinkedIn, Indeed)</li>
+            <li>Improve AI response accuracy</li>
+            <li>Improve system</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>10. Conclusion</h2>
+        <p>
+            This AI Educational Navigator combines artificial intelligence and real-time data extraction
+            to provide a powerful tool for students. It helps users get intelligent answers,
+            stay updated with educational news, and find relevant internship opportunities.
+        </p>
+    </div>
+
+</div>
+
+</body>
+</html>

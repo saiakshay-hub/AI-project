@@ -57,49 +57,93 @@ def internshala_scraper(skill):
     return data
 
 
-def indeed_scraper(skill):
-    skill_query = skill.replace(" ", "+")
-    url = f"https://in.indeed.com/jobs?q={skill_query}+internship"
+def remoteok_scraper(skill):
+    if not skill or not str(skill).strip():
+        return []
 
+    skill_lower = str(skill).strip().lower()
+
+    url = "https://remoteok.com/api"
     headers = {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/116.0.0.0 Safari/537.36",
+        "Accept-Language": "en-US,en;q=0.9",
+        "Accept": "application/json",
+        "Referer": "https://remoteok.com/",
     }
 
-    response = requests.get(url, headers=headers)
-    soup = BeautifulSoup(response.text, "html.parser")
+    try:
+        response = requests.get(url, headers=headers, timeout=15)
+        if response.status_code != 200:
+            return []
+
+        jobs = response.json()
+        if not isinstance(jobs, list):
+            return []
+
+    except Exception:
+        return []
 
     data = []
-
-    jobs = soup.find_all("a", attrs={"data-hide-spinner": "true"})
-
-    print("Indeed jobs found:", len(jobs))  # DEBUG
-
     for job in jobs:
-        try:
-            title = job.find("span").text.strip() if job.find("span") else "N/A"
-
-            company_tag = job.find_next("span", class_="companyName")
-            company = company_tag.text.strip() if company_tag else "N/A"
-
-            location_tag = job.find_next("div", class_="companyLocation")
-            location = location_tag.text.strip() if location_tag else "N/A"
-
-            link = "https://in.indeed.com" + job["href"]
-
-            data.append({
-                "title": title,
-                "company": company,
-                "location": location,
-                "skills_required": skill,
-                "apply_link": link,
-                "source": "Indeed"
-            })
-
-        except Exception as e:
-            print("Indeed error:", e)
+        if not isinstance(job, dict):
             continue
 
+        # skip the first metadata object if present
+        if job.get("id") is None:
+            continue
+
+        tags = [t.lower() for t in job.get("tags", []) if isinstance(t, str)]
+        position = str(job.get("position") or job.get("title") or "").strip()
+        company = str(job.get("company") or "").strip()
+        location = str(job.get("location") or job.get("geo") or "Remote").strip() or "Remote"
+
+       
+        if skill_lower not in position.lower() and skill_lower not in company.lower() and skill_lower not in " ".join(tags):
+            continue
+
+        apply_link = str(job.get("url") or job.get("link") or "").strip()
+        if apply_link and apply_link.startswith("/"):
+            apply_link = "https://remoteok.com" + apply_link
+
+        data.append({
+            "title": position or "N/A",
+            "company": company or "N/A",
+            "location": location or "Remote",
+            "skills_required": skill_lower,
+            "apply_link": apply_link or "#",
+            "source": "RemoteOK",
+        })
+
+    # Fallback: if no items matched the exact skill, return first few internship API results
+    if not data:
+        fallback = []
+        for job in jobs:
+            if not isinstance(job, dict) or job.get("id") is None:
+                continue
+
+            position = str(job.get("position") or job.get("title") or "").strip()
+            company = str(job.get("company") or "").strip()
+            location = str(job.get("location") or job.get("geo") or "Remote").strip() or "Remote"
+            apply_link = str(job.get("url") or job.get("link") or "").strip()
+            if apply_link and apply_link.startswith("/"):
+                apply_link = "https://remoteok.com" + apply_link
+
+            fallback.append({
+                "title": position or "N/A",
+                "company": company or "N/A",
+                "location": location or "Remote",
+                "skills_required": skill_lower,
+                "apply_link": apply_link or "#",
+                "source": "RemoteOK",
+            })
+            if len(fallback) >= 10:
+                break
+
+        return fallback
+
     return data
+
+
 
 def get_all_internships(skill):
     if not skill or not str(skill).strip():
@@ -115,10 +159,10 @@ def get_all_internships(skill):
         print("Internshala error:", e)
 
     try:
-        data2 = indeed_scraper(skill)
-        print("Indeed:", len(data2))
+        data2 = remoteok_scraper(skill)
+        print("remote:", len(data2))
         all_data.extend(data2)
     except Exception as e:
-        print("Indeed error:", e)
+        print("remote error:", e)
 
     return all_data

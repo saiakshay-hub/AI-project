@@ -26,7 +26,7 @@ class Internship(models.Model):
     skills = models.TextField(max_length=100, blank=True,null=True)
     skills_required = models.CharField(max_length=100,null=True,blank=True)
     description = models.TextField(blank=True)
-    apply_link = models.URLField()
+    apply_link = models.URLField(max_length=1000)
     source = models.CharField(max_length=100)
     
     def __str__(self):
