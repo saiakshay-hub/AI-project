@@ -25,7 +25,9 @@ def internshala_scraper(skill):
 
     for card in cards:
         try:
-            title_tag = card.find("h3")
+            title_tag = card.find("h3", class_="job-internship-name") 
+            if not title_tag:
+                title_tag = card.find("a") 
             title = title_tag.get_text(strip=True) if title_tag else "N/A"
 
             company_tag = card.find("p", class_="company-name") or card.find("h4")
